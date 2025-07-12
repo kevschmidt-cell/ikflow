@@ -1,0 +1,3 @@
+Dataset info
+  training_set_size: 85000
+  test_set_size: 15000

@@ -9,7 +9,7 @@ from pytorch_lightning import seed_everything
 import wandb
 import torch
 from ikflow.config import DATASET_TAG_NON_SELF_COLLIDING
-from jrl.config import GPU_IDX
+from jrl.config import GPU_IDX, DEVICE
 
 from ikflow import config
 from ikflow.model import IkflowModelParameters
@@ -18,6 +18,10 @@ from ikflow.training.lt_model import IkfLitModel
 from ikflow.training.lt_data import IkfLitDataset
 from ikflow.training.training_utils import get_checkpoint_dir
 from ikflow.utils import boolean_string, non_private_dict, get_wandb_project
+
+import logging
+logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger("pytorch_lightning").setLevel(logging.DEBUG)
 
 
 assert GPU_IDX >= 0
@@ -186,8 +190,9 @@ if __name__ == "__main__":
     print(base_hparams)
 
     torch.autograd.set_detect_anomaly(False)
+    print("Dataset wird geladen...")
     data_module = IkfLitDataset(robot.name, args.batch_size, args.val_set_size, args.dataset_tags)
-
+    print("Dataset geladen.")
     # Setup wandb logging
     wandb_logger = None
     if not args.disable_wandb:
@@ -239,7 +244,9 @@ if __name__ == "__main__":
         mode="max",
         filename="ikflow-checkpoint-{step}",
     )
-
+    print("\n==== Training wird gestartet ====\n")
+    print(f"  Dataset size (train): {data_module._samples_tr.shape}")
+    print(f"  Dataset size (test) : {data_module._samples_te.shape}\n")
     # Train
     trainer = Trainer(
         logger=wandb_logger,
@@ -250,6 +257,11 @@ if __name__ == "__main__":
         accelerator="gpu",
         log_every_n_steps=args.log_every,
         max_epochs=DEFAULT_MAX_EPOCHS,
-        enable_progress_bar=False if (os.getenv("IS_SLURM") is not None) or args.disable_progress_bar else True,
+        enable_progress_bar= True,
+        #enable_progress_bar=False if (os.getenv("IS_SLURM") is not None) or args.disable_progress_bar else True,
     )
+    print("Trainer initialized. Now starting training loop...\n")
+
     trainer.fit(model, data_module)
+
+    print("\n==== Training abgeschlossen ====\n")

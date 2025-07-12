@@ -184,6 +184,7 @@ class IkfLitModel(LightningModule):
         return lrs[0]
 
     def training_step(self, batch, batch_idx):
+        print(f"[TRAIN] Batch: {batch_idx} running on GPU.")
         del batch_idx
         t0 = time()
         loss, loss_data, force_log = self.ml_loss_fn(batch)
