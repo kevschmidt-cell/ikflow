@@ -34,8 +34,8 @@ DEFAULT_COUPLING_LAYER = "glow"
 DEFAULT_RNVP_CLAMP = 2.5
 DEFAULT_SOFTFLOW_NOISE_SCALE = 0.001
 DEFAULT_SOFTFLOW_ENABLED = True
-DEFAULT_N_NODES = 6
-DEFAULT_DIM_LATENT_SPACE = 8
+DEFAULT_N_NODES = 12
+DEFAULT_DIM_LATENT_SPACE = 10
 DEFAULT_COEFF_FN_INTERNAL_SIZE = 1024
 DEFAULT_COEFF_FN_CONFIG = 3
 DEFAULT_Y_NOISE_SCALE = 1e-7
@@ -196,13 +196,14 @@ if __name__ == "__main__":
     # Setup wandb logging
     wandb_logger = None
     if not args.disable_wandb:
-        wandb_entity, wandb_project = get_wandb_project()
+        wandb_entity = "kevschmidt9"
+        wandb_project = "ikflow"  # Oder wie dein Projekt heißen soll
         # Call `wandb.init` before creating a `WandbLogger` object so that runs have randomized names. Without this
         # call, the run names are all set to the project name. See this article for further information: https://lightrun.com/answers/lightning-ai-lightning-wandblogger--use-random-name-instead-of-project-as-default-name
         cfg = {"robot": args.robot_name}
         cfg.update(non_private_dict(args.__dict__))
         data_module.add_dataset_hashes_to_cfg(cfg)
-
+        
         wandb.init(
             entity=wandb_entity,
             project=wandb_project,
