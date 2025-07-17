@@ -196,8 +196,8 @@ if __name__ == "__main__":
     # Setup wandb logging
     wandb_logger = None
     if not args.disable_wandb:
-        wandb_entity = "kevschmidt9"
-        wandb_project = "ikflow"  # Oder wie dein Projekt heißen soll
+        wandb_entity = "kevschmidt9-fau-erlangen-n-rnberg"
+        wandb_project = "ikflow_1"  # Oder wie dein Projekt heißen soll
         # Call `wandb.init` before creating a `WandbLogger` object so that runs have randomized names. Without this
         # call, the run names are all set to the project name. See this article for further information: https://lightrun.com/answers/lightning-ai-lightning-wandblogger--use-random-name-instead-of-project-as-default-name
         cfg = {"robot": args.robot_name}

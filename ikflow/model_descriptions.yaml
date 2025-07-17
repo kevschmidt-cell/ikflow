@@ -21,7 +21,7 @@ panda_lite_tpm:
   dim_latent_space:       7
   coeff_fn_config:        3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
+  rnvp_clamp:             2.5T
   robot_name:             'panda'
   model_weights_url:      'https://storage.googleapis.com/ikflow_models/panda/panda_arm-young-night-84.pkl'
 
@@ -72,16 +72,27 @@ fetch_arm__large__mh186_9.25m:
 # === Iiwa7
 # 
 
-# iiwa7_full_temp_nsc_tpm:
-#   nb_nodes:               12
-#   dim_latent_space:       10
-#   coeff_fn_config:        3
-#   coeff_fn_internal_size: 1024
-#   rnvp_clamp:             2.5
-#   robot_name:             'iiwa7'
-#   model_weights_url:      'https://storage.googleapis.com/ikflow_models/iiwa7/iiwa7__serene-snowball-78__global_step%3D10.75M.pkl'
+iiwa7_full_temp_nsc_tpm:
+  nb_nodes:               12
+  dim_latent_space:       10
+  coeff_fn_config:        3
+  coeff_fn_internal_size: 1024
+  rnvp_clamp:             2.5
+  robot_name:             'iiwa7'
+  model_weights_url:      'https://storage.googleapis.com/ikflow_models/iiwa7/iiwa7__serene-snowball-78__global_step%3D10.75M.pkl'
 
+#
+# Iiwa7 left arm model
+#
 
+iiwa7_left_arm_0.75m:
+  nb_nodes:               12
+  dim_latent_space:       10
+  coeff_fn_config:        3
+  coeff_fn_internal_size: 1024
+  rnvp_clamp:             1.5
+  robot_name:             'iiwa7_L'
+  model_weights_url:      '/home/kevin/ikflow/iiwa7_L__likely-monkey-2__global_step=0.75M.pkl'
 # ===========================================================
 # === Rizon4
 # 

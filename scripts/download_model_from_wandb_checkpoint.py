@@ -47,7 +47,7 @@ if __name__ == "__main__":
     wandb_entity, wandb_project = get_wandb_project()
     t0 = time()
     api = wandb.Api()
-    artifact = api.artifact(f"{wandb_entity}/{wandb_project}/model-{args.wandb_run_id}:best_k")
+    artifact = api.artifact(f"{wandb_entity}/{wandb_project}/model-{args.wandb_run_id}:best")
     download_dir = artifact.download()
     print(f"Downloaded artifact in {round(time() - t0, 2)}s")
 

@@ -1,0 +1,27 @@
+base_hparams: !!python/object:ikflow.model.IkflowModelParameters
+  coeff_fn_config: 3
+  coeff_fn_internal_size: 1024
+  coupling_layer: glow
+  dim_latent_space: 10
+  init_scale: 0.04473500291638653
+  lambd_predict: 1.0
+  nb_nodes: 12
+  permute_random_enabled: true
+  rnvp_clamp: 2.5
+  run_description: null
+  sigmoid_on_output: false
+  softflow_enabled: true
+  softflow_noise_scale: 0.001
+  y_noise_scale: 1.0e-07
+  zeros_noise_scale: 0.001
+checkpoint_every: 500
+gamma: 0.9794578299341784
+gradient_clip: 1
+lambd: 1
+learning_rate: 0.0001
+log_every: 25
+optimizer_name: adamw
+samples_per_pose: 100
+sigmoid_on_output: false
+step_lr_every: 39062
+weight_decay: 1.8e-05

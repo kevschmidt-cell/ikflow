@@ -18,7 +18,7 @@ class IkflowModelParameters:
     def __init__(self):
         self.coupling_layer = "glow"
         self.nb_nodes = 12
-        self.dim_latent_space = 9
+        self.dim_latent_space = 10
         self.coeff_fn_config = 3
         self.coeff_fn_internal_size = 1024
         self.permute_random_enabled = True

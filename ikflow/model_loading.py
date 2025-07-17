@@ -73,7 +73,11 @@ def get_ik_solver(
     assert isinstance(robot_name, str), f"robot_name must be a string, got {type(robot_name)}"
     assert isinstance(hparams, dict), f"model_hyperparameters must be a Dict, got {type(hparams)}"
 
-    model_weights_filepath = download_model(model_weights_url)
+    if model_weights_url.startswith("http"):
+        model_weights_filepath = download_model(model_weights_url)
+    else:
+        model_weights_filepath = model_weights_url  # Lokaler Pfad
+
     assert os.path.isfile(model_weights_filepath), (
         f"File '{model_weights_filepath}' was not found. Unable to load model weights"
     )
