@@ -93,6 +93,16 @@ iiwa7_left_arm_0.75m:
   rnvp_clamp:             1.5
   robot_name:             'iiwa7_L'
   model_weights_url:      '/home/kevin/iiwa7_L__likely-monkey-2__global_step=0.75M.pkl'
+
+iiwa7_right_arm_0.1m:
+  nb_nodes:               12
+  dim_latent_space:       10
+  coeff_fn_config:        3
+  coeff_fn_internal_size: 1024
+  rnvp_clamp:             1.5
+  robot_name:             'iiwa7_R'
+  model_weights_url:      '/home/kevin/iiwa7_R__classic-thunder-4__global_step=0.1M.pkl'
+
 # ===========================================================
 # === Rizon4
 # 

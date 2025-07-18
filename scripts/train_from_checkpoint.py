@@ -47,7 +47,7 @@ if __name__ == "__main__":
     # Note: The checkpointing call back we use (`ModelCheckpoint`) saves the k most recent checkpoints and chooses
     # which to save by ranking with `global_step`. This means for whatever reason that the 'latest' alias isn't
     # available on the wandb side. They store 'best_k' instead which is what we want (I hope <*_*>)
-    artifact = wandb_run.use_artifact(f"model-{args.wandb_run_id}:best_k")
+    artifact = wandb_run.use_artifact(f"model-{args.wandb_run_id}:best")
     t0 = time()
     artifact_dir = artifact.download()
     print(f"Downloaded artifact '{artifact.name}' in {round(1000 * (time() - t0), 2)} ms")
