@@ -1,5 +1,4 @@
-from jrl.robots import get_robot
-
-print("Starte Roboter-Initialisierung...")
-robot = get_robot("dual_iiwa7")
-print("Roboter geladen.")
+import torch
+print("CUDA verfügbar:", torch.cuda.is_available())
+print("CUDA Version:", torch.version.cuda)
+print("GPU Name:", torch.cuda.get_device_name(0))

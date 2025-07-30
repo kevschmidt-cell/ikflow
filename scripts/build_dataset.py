@@ -155,8 +155,8 @@ def _get_tags(args):
 
 """
 # Build dataset
-
-uv run python scripts/build_dataset.py --robot_name=fetch --training_set_size=25000000 --only_non_self_colliding
+pyth
+uv run on scripts/build_dataset.py --robot_name=fetch --training_set_size=25000000 --only_non_self_colliding
 uv run python scripts/build_dataset.py --robot_name=panda --training_set_size=25000000 --only_non_self_colliding
 uv run python scripts/build_dataset.py --robot_name=fetch_arm --training_set_size=25000000 --only_non_self_colliding
 """
@@ -176,6 +176,7 @@ if __name__ == "__main__":
     print(f"Building dataset for robot: {robot}")
     dset_directory = get_dataset_directory(robot.name)
     t0 = time()
+    print(f"Speichere unter: {dset_directory}")
     save_dataset_to_disk(
         robot,
         dset_directory,
