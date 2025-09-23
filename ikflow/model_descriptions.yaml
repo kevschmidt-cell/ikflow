@@ -101,7 +101,17 @@ iiwa7_right_arm_0.1m:
   coeff_fn_internal_size: 1024
   rnvp_clamp:             1.5
   robot_name:             'iiwa7_R'
+  #model_weights_url:      '/home/kevin/iiwa7_R__helpful-capybara-18__global_step=0.8M.pkl'
   model_weights_url:      '/home/kevin/iiwa7_R__true-deluge-16__global_step=0.75M.pkl'
+
+simple_robot_01_0.05m:
+  nb_nodes:               12
+  dim_latent_space:       10
+  coeff_fn_config:        3
+  coeff_fn_internal_size: 1024
+  rnvp_clamp:             1.5
+  robot_name:             'simple_robot_01'
+  model_weights_url:      '/home/kevin/simple_robot_01__hardy-jazz-19__global_step=0.05M.pkl'
 
 # ===========================================================
 # === Rizon4

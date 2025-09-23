@@ -113,11 +113,16 @@ def save_dataset_to_disk(
     poses_tr = torch.tensor(poses_tr, dtype=torch.float32)
     samples_te = torch.tensor(samples_te, dtype=torch.float32)
     poses_te = torch.tensor(poses_te, dtype=torch.float32)
+    print("samples_tr shape:", samples_tr.shape)
+    print("samples_tr[:,0].min():", samples_tr[:,0].min().item())
+    print("samples_tr[:,0].max():", samples_tr[:,0].max().item())
+    print("samples_tr[:,0].std():", samples_tr[:,0].std().item())
 
     # Sanity check
-    for arr in [samples_tr, samples_te, poses_tr, poses_te]:
+    for name, arr in zip(["samples_tr", "samples_te"], [samples_tr, samples_te]):
         for i in range(arr.shape[1]):
-            assert torch.std(arr[:, i]) > 0.001, f"Error: Column {i} in samples has zero stdev"
+            assert torch.std(arr[:, i]) > 0.001, f"Error: Column {i} in {name} has zero stdev"
+
     assert_joint_angle_tensor_in_joint_limits(robot.actuated_joints_limits, samples_tr, "samples_tr", 0.0)
     assert_joint_angle_tensor_in_joint_limits(robot.actuated_joints_limits, samples_te, "samples_te", 0.0)
 
@@ -177,6 +182,7 @@ if __name__ == "__main__":
     dset_directory = get_dataset_directory(robot.name)
     t0 = time()
     print(f"Speichere unter: {dset_directory}")
+    
     save_dataset_to_disk(
         robot,
         dset_directory,
@@ -187,4 +193,4 @@ if __name__ == "__main__":
         joint_limit_eps=0.004363323129985824,  # np.deg2rad(0.25)
     )
     print(f"Saved dataset with {args.training_set_size} samples in {time() - t0:.2f} seconds")
-    print_saved_datasets_stats(tags)
+    

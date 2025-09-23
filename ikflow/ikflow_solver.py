@@ -335,11 +335,15 @@ class IKFlowSolver:
                     [y.expand((n, 7)), torch.zeros((n, 1), dtype=DEFAULT_TORCH_DTYPE, device=device)], dim=1
                 )
             else:
-                conditional = torch.cat([y, torch.zeros((n, 1), dtype=DEFAULT_TORCH_DTYPE, device=device)], dim=1)
+                conditional = torch.cat(
+                    [y, torch.zeros((y.shape[0], 1), dtype=DEFAULT_TORCH_DTYPE, device=device)],
+                    dim=1
+                )
+
 
             # Get latent
             if latent is None:
-                latent = draw_latent(latent_distribution, latent_scale, (n, self._network_width), device)
+                latent = draw_latent(latent_distribution, latent_scale, (conditional.shape[0], self._network_width), device)
             return self._run_inference(latent, conditional, t0, clamp_to_joint_limits, return_detailed)
 
     def generate_exact_ik_solutions(

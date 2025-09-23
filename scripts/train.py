@@ -68,13 +68,15 @@ ROBOT=fr3
 # Smoke test - wandb enabled
 uv run python scripts/train.py \
     --robot_name=$ROBOT \
-    --nb_nodes=6 \
-    --batch_size=128 \
-    --learning_rate=0.0005 \
-    --log_every=125 \
-    --eval_every=50 \
-    --val_set_size=20 \
-    --checkpoint_every=250
+    --nb_nodes=12 \
+    --batch_size=64 \
+    --learning_rate=0.0001 \
+    --log_every=20000 \
+    --eval_every=12500 \
+    --val_set_size=500 \
+    --checkpoint_every=25000 \
+    --y_noise_scale=0.00001 \
+    --rnvp_clamp=1.5 \
 
 
 # Smoke test - wandb enabled, with sigmoid clamping
