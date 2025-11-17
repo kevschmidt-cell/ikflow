@@ -85,24 +85,25 @@ iiwa7_full_temp_nsc_tpm:
 # Iiwa7 left arm model
 #
 
-iiwa7_left_arm_0.75m:
+iiwa7_left_arm:
   nb_nodes:               12
   dim_latent_space:       10
   coeff_fn_config:        3
   coeff_fn_internal_size: 1024
   rnvp_clamp:             1.5
   robot_name:             'iiwa7_L'
-  model_weights_url:      '/home/kevin/iiwa7_L__giddy-fire-15__global_step=0.75M.pkl'
+  #model_weights_url:      '/home/kevin/dev/ikflow/iiwa7_L__giddy-fire-15__global_step=0.75M.pkl'
+  model_weights_url:      '/home/kevin/dev/ikflow/iiwa7_L__pious-sky-21__global_step=0.138M.pkl'
 
-iiwa7_right_arm_0.1m:
+iiwa7_right_arm:
   nb_nodes:               12
   dim_latent_space:       10
   coeff_fn_config:        3
   coeff_fn_internal_size: 1024
   rnvp_clamp:             1.5
   robot_name:             'iiwa7_R'
-  #model_weights_url:      '/home/kevin/iiwa7_R__helpful-capybara-18__global_step=0.8M.pkl'
-  model_weights_url:      '/home/kevin/iiwa7_R__true-deluge-16__global_step=0.75M.pkl'
+  #model_weights_url:      '/home/kevin/dev/ikflow/iiwa7_R__morning-terrain-23__global_step=0.168M.pkl'
+  model_weights_url: '/home/kevin/dev/ikflow/iiwa7_R__true-deluge-16__global_step=0.75M.pkl'
 
 simple_robot_01_0.05m:
   nb_nodes:               12

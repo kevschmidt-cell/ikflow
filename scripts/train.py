@@ -67,14 +67,14 @@ ROBOT=fr3
 
 # Smoke test - wandb enabled
 uv run python scripts/train.py \
-    --robot_name=$ROBOT \
+    --robot_name=iiwa7_R \
     --nb_nodes=12 \
     --batch_size=64 \
     --learning_rate=0.0001 \
-    --log_every=20000 \
-    --eval_every=12500 \
+    --log_every=6000 \
+    --eval_every=6000 \
     --val_set_size=500 \
-    --checkpoint_every=25000 \
+    --checkpoint_every=6000 \
     --y_noise_scale=0.00001 \
     --rnvp_clamp=1.5 \
 

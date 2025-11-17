@@ -32,7 +32,7 @@ def format_state_dict(state_dict: Dict) -> Dict:
 _____________
 Example usage
 
-uv run python scripts/download_model_from_wandb_checkpoint.py --wandb_run_id=2uidt835
+uv run python scripts/download_model_from_wandb_checkpoint.py --wandb_run_id=3uq2ly77
 """
 
 if __name__ == "__main__":
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     wandb_entity, wandb_project = get_wandb_project()
     t0 = time()
     api = wandb.Api()
-    artifact = api.artifact(f"{wandb_entity}/{wandb_project}/model-{args.wandb_run_id}:best")
+    artifact = api.artifact(f"{wandb_entity}/{wandb_project}/model-{args.wandb_run_id}:v20")
     download_dir = artifact.download()
     print(f"Downloaded artifact in {round(time() - t0, 2)}s")
 
