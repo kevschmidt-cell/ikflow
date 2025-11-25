@@ -174,7 +174,7 @@ def evaluate_model(
 uv run python scripts/evaluate.py --testset_size=500 --n_solutions_for_runtime=100 --all
 
 uv run python scripts/evaluate.py --testset_size=500 --model_name=panda__full__lp191_5.25m --solutions_per_pose=20
-uv run python scripts/evaluate.py --testset_size=500 --model_name=iiwa7_left_arm --solutions_per_pose=20 --do_refinement
+uv run python scripts/evaluate.py --testset_size=500 --model_name=iiwa7_neutral --solutions_per_pose=20 --do_refinement
 
 uv run python scripts/evaluate.py --testset_size=500 --model_name=fetch_arm_full_temp
 uv run python scripts/evaluate.py --testset_size=5 --model_name=fetch_full_temp_nsc_tpm

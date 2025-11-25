@@ -29,7 +29,7 @@ seed_everything(SEED, workers=True)
 _____________
 Example usage
 
-uv run python scripts/train_from_checkpoint.py --wandb_run_id=1vhgo90v
+uv run python scripts/train_from_checkpoint.py --wandb_run_id=b35dybuf
 """
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ from pytorch_lightning import seed_everything
 import wandb
 import torch
 from ikflow.config import DATASET_TAG_NON_SELF_COLLIDING
-from jrl.config import GPU_IDX, DEVICE
+from jrl.config import GPU_IDX
 
 from ikflow import config
 from ikflow.model import IkflowModelParameters
@@ -18,10 +18,6 @@ from ikflow.training.lt_model import IkfLitModel
 from ikflow.training.lt_data import IkfLitDataset
 from ikflow.training.training_utils import get_checkpoint_dir
 from ikflow.utils import boolean_string, non_private_dict, get_wandb_project
-
-import logging
-logging.getLogger().setLevel(logging.DEBUG)
-logging.getLogger("pytorch_lightning").setLevel(logging.DEBUG)
 
 
 assert GPU_IDX >= 0
@@ -38,7 +34,7 @@ DEFAULT_N_NODES = 12
 DEFAULT_DIM_LATENT_SPACE = 10
 DEFAULT_COEFF_FN_INTERNAL_SIZE = 1024
 DEFAULT_COEFF_FN_CONFIG = 3
-DEFAULT_Y_NOISE_SCALE = 0.00001
+DEFAULT_Y_NOISE_SCALE = 1e-5
 DEFAULT_ZEROS_NOISE_SCALE = 1e-3
 DEFAULT_SIGMOID_ON_OUTPUT = False
 
@@ -48,7 +44,7 @@ DEFAULT_LR = 1e-4
 DEFAULT_BATCH_SIZE = 512
 DEFAULT_N_EPOCHS = 100
 DEFAULT_GAMMA = 0.9794578299341784
-DEFAULT_STEP_LR_EVERY = int(int(2.5 * 1e6) / 64)
+DEFAULT_STEP_LR_EVERY = 20000
 DEFAULT_GRADIENT_CLIP_VAL = 1
 
 
@@ -67,31 +63,27 @@ ROBOT=fr3
 
 # Smoke test - wandb enabled
 uv run python scripts/train.py \
-    --robot_name=iiwa7_R \
-    --nb_nodes=12 \
-    --batch_size=64 \
-    --learning_rate=0.0001 \
-    --log_every=6000 \
-    --eval_every=6000 \
-    --val_set_size=500 \
-    --checkpoint_every=6000 \
-    --y_noise_scale=0.00001 \
-    --rnvp_clamp=1.5 \
+    --robot_name=$ROBOT \
+    --nb_nodes=6 \
+    --batch_size=128 \
+    --learning_rate=0.0005 \
+    --log_every=125 \
+    --eval_every=50 \
+    --val_set_size=20 \
+    --checkpoint_every=250
 
 
 # Smoke test - wandb enabled, with sigmoid clamping
 uv run python scripts/train.py \
-    --robot_name=$ROBOT \
-    --nb_nodes=6 \
-    --batch_size=64 \
-    --learning_rate=0.0005 \
+    --robot_name=iiwa7_N \
+    --nb_nodes=12 \
+    --batch_size=128 \
+    --learning_rate=0.0001 \
     --log_every=250 \
     --eval_every=250 \
     --val_set_size=250 \
-    --softflow_enabled=False \
-    --sigmoid_on_output=True \
     --dim_latent_space=10 \
-    --checkpoint_every=50000
+    --checkpoint_every=5000
 
 
 # Smoke test - wandb disabled
@@ -192,20 +184,18 @@ if __name__ == "__main__":
     print(base_hparams)
 
     torch.autograd.set_detect_anomaly(False)
-    print("Dataset wird geladen...")
     data_module = IkfLitDataset(robot.name, args.batch_size, args.val_set_size, args.dataset_tags)
-    print("Dataset geladen.")
+
     # Setup wandb logging
     wandb_logger = None
     if not args.disable_wandb:
-        wandb_entity = "kevschmidt9-fau-erlangen-n-rnberg"
-        wandb_project = "ikflow_1"  # Oder wie dein Projekt heißen soll
+        wandb_entity, wandb_project = get_wandb_project()
         # Call `wandb.init` before creating a `WandbLogger` object so that runs have randomized names. Without this
         # call, the run names are all set to the project name. See this article for further information: https://lightrun.com/answers/lightning-ai-lightning-wandblogger--use-random-name-instead-of-project-as-default-name
         cfg = {"robot": args.robot_name}
         cfg.update(non_private_dict(args.__dict__))
         data_module.add_dataset_hashes_to_cfg(cfg)
-        
+
         wandb.init(
             entity=wandb_entity,
             project=wandb_project,
@@ -247,9 +237,7 @@ if __name__ == "__main__":
         mode="max",
         filename="ikflow-checkpoint-{step}",
     )
-    print("\n==== Training wird gestartet ====\n")
-    print(f"  Dataset size (train): {data_module._samples_tr.shape}")
-    print(f"  Dataset size (test) : {data_module._samples_te.shape}\n")
+
     # Train
     trainer = Trainer(
         logger=wandb_logger,
@@ -260,11 +248,6 @@ if __name__ == "__main__":
         accelerator="gpu",
         log_every_n_steps=args.log_every,
         max_epochs=DEFAULT_MAX_EPOCHS,
-        enable_progress_bar= True,
-        #enable_progress_bar=False if (os.getenv("IS_SLURM") is not None) or args.disable_progress_bar else True,
+        enable_progress_bar=False if (os.getenv("IS_SLURM") is not None) or args.disable_progress_bar else True,
     )
-    print("Trainer initialized. Now starting training loop...\n")
-
     trainer.fit(model, data_module)
-
-    print("\n==== Training abgeschlossen ====\n")

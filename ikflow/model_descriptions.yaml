@@ -1,129 +1,88 @@
-# Notes:
-# 1. 'tpm' is short for 'top performing model'.
-# 2. 'nsc' is short for 'non self colliding'. This means the dataset used for training has only non self-colliding configs.
-#     These models will typically return 3-6% self colliding solutions
-
-# ===========================================================
-# === Panda
-# 
-
-panda__full__lp191_5.25m:
-  nb_nodes:               12
-  dim_latent_space:       7
-  coeff_fn_config:        3
-  coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
-  robot_name:             'panda'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/panda/panda__lyric-puddle-191__global_step%3D5.25M.pkl'
-
-panda_lite_tpm:
-  nb_nodes:               6
-  dim_latent_space:       7
-  coeff_fn_config:        3
-  coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5T
-  robot_name:             'panda'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/panda/panda_arm-young-night-84.pkl'
-
-
-# ===========================================================
-# === Fetch
-# 
-
-fetch_full_temp_nsc_tpm:
-  nb_nodes:               12
-  dim_latent_space:       8
-  coeff_fn_config:        3
-  coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
-  robot_name:             'fetch'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/fetch/fetch__sleek-microwave-65__global_step%3D9.25M.pkl'
-
 fetch__large__ns183_9.75m:
-  nb_nodes:               16
-  dim_latent_space:       8
-  coeff_fn_config:        3
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
-  robot_name:             'fetch'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/fetch/fetch__northern-sea-183__global_step%3D9.75M.pkl'
-
-
-# ===========================================================
-# === FetchArm
-# 
-
+  dim_latent_space: 8
+  model_weights_url: https://storage.googleapis.com/ikflow_models/fetch/fetch__northern-sea-183__global_step%3D9.75M.pkl
+  nb_nodes: 16
+  rnvp_clamp: 2.5
+  robot_name: fetch
 fetch_arm__large__mh186_9.25m:
-  nb_nodes:               16
-  dim_latent_space:       10
-  coeff_fn_config:        3
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
-  robot_name:             'fetch_arm'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/fetch_arm/fetch_arm__major-hill-186__global_step%3D9.25M.pkl'
-
-
-
-
-
-# TODO: add weights back once Iiwa7 is added to jrl (currently ommited because missing capsules)
-
-# ===========================================================
-# === Iiwa7
-# 
-
+  dim_latent_space: 10
+  model_weights_url: https://storage.googleapis.com/ikflow_models/fetch_arm/fetch_arm__major-hill-186__global_step%3D9.25M.pkl
+  nb_nodes: 16
+  rnvp_clamp: 2.5
+  robot_name: fetch_arm
+fetch_full_temp_nsc_tpm:
+  coeff_fn_config: 3
+  coeff_fn_internal_size: 1024
+  dim_latent_space: 8
+  model_weights_url: https://storage.googleapis.com/ikflow_models/fetch/fetch__sleek-microwave-65__global_step%3D9.25M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 2.5
+  robot_name: fetch
 iiwa7_full_temp_nsc_tpm:
-  nb_nodes:               12
-  dim_latent_space:       10
-  coeff_fn_config:        3
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
-  robot_name:             'iiwa7'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/iiwa7/iiwa7__serene-snowball-78__global_step%3D10.75M.pkl'
-
-#
-# Iiwa7 left arm model
-#
-
+  dim_latent_space: 10
+  model_weights_url: https://storage.googleapis.com/ikflow_models/iiwa7/iiwa7__serene-snowball-78__global_step%3D10.75M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 2.5
+  robot_name: iiwa7
 iiwa7_left_arm:
-  nb_nodes:               12
-  dim_latent_space:       10
-  coeff_fn_config:        3
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             1.5
-  robot_name:             'iiwa7_L'
-  #model_weights_url:      '/home/kevin/dev/ikflow/iiwa7_L__giddy-fire-15__global_step=0.75M.pkl'
-  model_weights_url:      '/home/kevin/dev/ikflow/iiwa7_L__pious-sky-21__global_step=0.138M.pkl'
-
+  dim_latent_space: 10
+  model_weights_url: /home/kevin/dev/ikflow/iiwa7_L__pious-sky-21__global_step=0.138M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 1.5
+  robot_name: iiwa7_L
+iiwa7_neutral:
+  coeff_fn_config: 3
+  coeff_fn_internal_size: 1024
+  dim_latent_space: 10
+  model_weights_url: /home/kevin/dev/ikflow/iiwa7_N__zesty-dust-31__global_step=0.645M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 1.5
+  robot_name: iiwa7_N
 iiwa7_right_arm:
-  nb_nodes:               12
-  dim_latent_space:       10
-  coeff_fn_config:        3
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             1.5
-  robot_name:             'iiwa7_R'
-  #model_weights_url:      '/home/kevin/dev/ikflow/iiwa7_R__morning-terrain-23__global_step=0.168M.pkl'
-  model_weights_url: '/home/kevin/dev/ikflow/iiwa7_R__true-deluge-16__global_step=0.75M.pkl'
-
-simple_robot_01_0.05m:
-  nb_nodes:               12
-  dim_latent_space:       10
-  coeff_fn_config:        3
+  dim_latent_space: 10
+  model_weights_url: /home/kevin/dev/ikflow/iiwa7_R__true-deluge-16__global_step=0.75M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 1.5
+  robot_name: iiwa7_R
+panda__full__lp191_5.25m:
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             1.5
-  robot_name:             'simple_robot_01'
-  model_weights_url:      '/home/kevin/simple_robot_01__hardy-jazz-19__global_step=0.05M.pkl'
-
-# ===========================================================
-# === Rizon4
-# 
-
-# TODO: Upload a better model when one becomes available
+  dim_latent_space: 7
+  model_weights_url: https://storage.googleapis.com/ikflow_models/panda/panda__lyric-puddle-191__global_step%3D5.25M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 2.5
+  robot_name: panda
+panda_lite_tpm:
+  coeff_fn_config: 3
+  coeff_fn_internal_size: 1024
+  dim_latent_space: 7
+  model_weights_url: https://storage.googleapis.com/ikflow_models/panda/panda_arm-young-night-84.pkl
+  nb_nodes: 6
+  rnvp_clamp: 2.5T
+  robot_name: panda
 rizon4__snowy-brook-208__global_step=2.75M:
-  nb_nodes:               12
-  dim_latent_space:       7
-  coeff_fn_config:        3
+  coeff_fn_config: 3
   coeff_fn_internal_size: 1024
-  rnvp_clamp:             2.5
-  robot_name:             'rizon4'
-  model_weights_url:      'https://storage.googleapis.com/ikflow_models/rizon4/rizon4__snowy-brook-208__global_step%3D2.75M.pkl'
+  dim_latent_space: 7
+  model_weights_url: https://storage.googleapis.com/ikflow_models/rizon4/rizon4__snowy-brook-208__global_step%3D2.75M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 2.5
+  robot_name: rizon4
+simple_robot_01_0.05m:
+  coeff_fn_config: 3
+  coeff_fn_internal_size: 1024
+  dim_latent_space: 10
+  model_weights_url: /home/kevin/simple_robot_01__hardy-jazz-19__global_step=0.05M.pkl
+  nb_nodes: 12
+  rnvp_clamp: 1.5
+  robot_name: simple_robot_01

@@ -32,24 +32,26 @@ def format_state_dict(state_dict: Dict) -> Dict:
 _____________
 Example usage
 
-uv run python scripts/download_model_from_wandb_checkpoint.py --wandb_run_id=3uq2ly77
+uv run python scripts/download_model_from_wandb_checkpoint.py --wandb_run_id=b35dybuf
 """
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="Download ikflow model from Weights and Biases")
 
-    # Note: WandB saves artifacts by the run ID (i.e. '34c2gimi') not the run name ('dashing-forest-33'). This is
-    # slightly annoying because you need to click on a run to get its ID.
-    parser.add_argument("--wandb_run_id", type=str, help="The run ID of the wandb run to load. Example: '34c2gimi'")
-    parser.add_argument("--disable_progress_bar", action="store_true")
+    parser.add_argument("--wandb_run_id", type=str, help="The run ID of the wandb run to load.")
+    parser.add_argument("--version", type=int, required=True, help="Artifact version number, e.g. 0 for v0.")
     args = parser.parse_args()
 
     wandb_entity, wandb_project = get_wandb_project()
     t0 = time()
     api = wandb.Api()
-    artifact = api.artifact(f"{wandb_entity}/{wandb_project}/model-{args.wandb_run_id}:v20")
+
+    # NEW: dynamic version instead of hard-coded v185
+    artifact = api.artifact(f"{wandb_entity}/{wandb_project}/model-{args.wandb_run_id}:v{args.version}")
+
     download_dir = artifact.download()
-    print(f"Downloaded artifact in {round(time() - t0, 2)}s")
+    print(f"Downloaded artifact version v{args.version} in {round(time() - t0, 2)}s")
+
 
     t0 = time()
     run = api.run(f"/{wandb_entity}/{wandb_project}/runs/{args.wandb_run_id}")
