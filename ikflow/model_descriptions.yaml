@@ -34,7 +34,7 @@ iiwa7_left_arm:
   coeff_fn_config: 3
   coeff_fn_internal_size: 1024
   dim_latent_space: 10
-  model_weights_url: /home/kevin/dev/ikflow/iiwa7_L__pious-sky-21__global_step=0.138M.pkl
+  model_weights_url: /home/kevin/dev/ikflow/iiwa7_L__atomic-snowball-34__global_step=0.384M.pkl
   nb_nodes: 12
   rnvp_clamp: 1.5
   robot_name: iiwa7_L
@@ -42,7 +42,7 @@ iiwa7_neutral:
   coeff_fn_config: 3
   coeff_fn_internal_size: 1024
   dim_latent_space: 10
-  model_weights_url: /home/kevin/dev/ikflow/iiwa7_N__zesty-dust-31__global_step=0.645M.pkl
+  model_weights_url: /home/kevin/dev/ikflow/iiwa7_N__zesty-dust-31__global_step=0.935M.pkl
   nb_nodes: 12
   rnvp_clamp: 1.5
   robot_name: iiwa7_N

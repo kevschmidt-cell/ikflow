@@ -44,7 +44,7 @@ DEFAULT_LR = 1e-4
 DEFAULT_BATCH_SIZE = 512
 DEFAULT_N_EPOCHS = 100
 DEFAULT_GAMMA = 0.9794578299341784
-DEFAULT_STEP_LR_EVERY = 20000
+DEFAULT_STEP_LR_EVERY = 39000
 DEFAULT_GRADIENT_CLIP_VAL = 1
 
 
@@ -75,15 +75,15 @@ uv run python scripts/train.py \
 
 # Smoke test - wandb enabled, with sigmoid clamping
 uv run python scripts/train.py \
-    --robot_name=iiwa7_N \
+    --robot_name=iiwa7_L \
     --nb_nodes=12 \
-    --batch_size=128 \
+    --batch_size=64 \
     --learning_rate=0.0001 \
-    --log_every=250 \
-    --eval_every=250 \
-    --val_set_size=250 \
+    --log_every=6000 \
+    --eval_every=6000 \
+    --val_set_size=500 \
     --dim_latent_space=10 \
-    --checkpoint_every=5000
+    --checkpoint_every=6000
 
 
 # Smoke test - wandb disabled

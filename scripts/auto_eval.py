@@ -5,9 +5,9 @@ import os
 import csv
 from tqdm import tqdm
 
-VERSIONS = list(range(67, 187))
-RUN_ID = "b35dybuf"
-MODEL_NAME = "iiwa7_neutral"
+VERSIONS = list(range(0, 63))
+RUN_ID = "j08o8cjr"
+MODEL_NAME = "iiwa7_left_arm"
 YAML_PATH = "/home/kevin/dev/ikflow/ikflow/model_descriptions.yaml"
 CSV_PATH = "results.csv"
 

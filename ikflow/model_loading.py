@@ -84,7 +84,7 @@ def get_ik_solver(
 
     if robot is None:
         robot = get_robot(robot_name)
-    assert robot.name == robot_name
+    #assert robot.name == robot_name
 
     # Build IKFlowSolver and set weights
     hyper_parameters = IkflowModelParameters()
